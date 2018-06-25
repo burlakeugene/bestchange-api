@@ -117,9 +117,7 @@ function getData(){
 }
 
 app.get('/my', function(req, res){
-  	getData().then((result) => {
-		res.send(result);
-	});
+	res.send('12312321');
 });
 
 app.listen(3004, function(){
