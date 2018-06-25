@@ -36,6 +36,7 @@ function mkDirByPathSync(targetDir, {isRelativeToScript = false} = {}) {
 function getCurrinciesId(first, second){
 	return new Promise((resolve, reject) => {
 		fs.readFile(currenciesUrl, function(error, data){
+			console.log(error);
 			data = iconv.decode(data, "cp1251");
 			var result = [];
 			if(error) throw error;
@@ -98,23 +99,29 @@ function getData(){
 		mkDirByPathSync('download');
 		var file = fs.createWriteStream(zipUrl);
 		http.get("http://www.bestchange.ru/bm/info.zip", function(response) {
-				response.pipe(file);    
+			response.pipe(file);    
 		}).on('close', function () {
-				mkDirByPathSync('download/output');
-			fs.createReadStream(zipUrl).pipe(unzip.Extract({ path: 'download/output' }));
-			getCurrinciesId('Advanced Cash USD', 'Яндекс.Деньги').then((result) => {
-				getExchanges(result).then((result) => {
-					resolve(result);
+			mkDirByPathSync('download/output');
+			fs.createReadStream(zipUrl).pipe(
+				unzip.Extract({ path: 'download/output' })
+			);
+			setTimeout(() => {
+				getCurrinciesId('Advanced Cash USD', 'Яндекс.Деньги').then((result) => {
+					getExchanges(result).then((result) => {
+						resolve(result);
+					});
 				});
-			});
+			}, 1000);			
 		});
 	});
 }
 
 app.get('/my', function(req, res){
-  getData().then((result) => {
+  	getData().then((result) => {
 		res.send(result);
-	})
+	});
 });
 
-app.listen(3000);
+app.listen(3004, function(){
+	console.log('Run');
+});
