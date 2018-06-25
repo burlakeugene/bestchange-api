@@ -1,0 +1,22 @@
+{
+  "name": "bestchange",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "iconv": "^2.3.0",
+    "iconv-lite": "^0.4.23",
+    "path": "^0.12.7",
+    "unzip": "^0.1.11",
+    "windows-1251": "^1.0.0"
+  }
+}
