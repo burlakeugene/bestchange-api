@@ -103,13 +103,14 @@ function getData(){
 			mkDirByPathSync('download/output');
 			fs.createReadStream(zipUrl).pipe(
 				unzip.Extract({ path: 'download/output' })
-			).on('finish', () =>{
+			);
+			setTimeout(() => {
 				getCurrinciesId('Advanced Cash USD', 'Яндекс.Деньги').then((result) => {
 					getExchanges(result).then((result) => {
 						resolve(result);
 					});
-				})
-			});		
+				});
+			}, 1000);			
 		});
 	});
 }
