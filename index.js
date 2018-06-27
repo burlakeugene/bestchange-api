@@ -7,7 +7,7 @@ var cors = require('cors');
 var express = require('express');
 var app = express();
 app.use(cors());
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 var zipUrl = 'download/info.zip',
 		currenciesUrl = 'download/output/bm_cy.dat',
 		exchangesUrl = 'download/output/bm_rates.dat';
